@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <title>My Second Blog</title>
+ <!-- Latest compiled and minified CSS -->
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+ <div class="container">
+  <h1><a href="https://teckhockng.github.io/blog">blog</a></h1>
+ </div>
+</head>
+<body>
+ <div class="container">
+<div class="row">
+ <div class="col-md-8">
+  <h3>My Second Blog</h3>
+  <label>2019-09-12</label>
+  <p>This is my second blog post</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+<span class="kn">import</span> <span class="nn">chart</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">[</span><span class="s1">&#39;Week 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Python Basics&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;Week 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Pandas&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;Week 3&#39;</span><span class="p">,</span> <span class="s1">&#39;Linear Regression&#39;</span><span class="p">]</span>
+<span class="p">])</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">())</span>
+</pre></div>
+
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Week 1</td>
+      <td>Python Basics</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Week 2</td>
+      <td>Pandas</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Week 3</td>
+      <td>Linear Regression</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This is an image.</p>
+<p><img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.thewrap.com%2Fwp-content%2Fuploads%2F2016%2F04%2Fpuss-in-boots-.jpg&imgrefurl=https%3A%2F%2Fwww.thewrap.com%2Fdreamworks-announces-puss-in-boots-2-directed-by-spider-verse-oscar-winner-bob-perschietti%2F&docid=pwhEp9THH2MpCM&tbnid=swfu0-yETVT9BM%3A&vet=10ahUKEwiFgbCmz8vkAhUIVK0KHfaGCRUQMwh7KAAwAA..i&w=618&h=412&client=ubuntu&bih=982&biw=1855&q=puss%20in%20boots&ved=0ahUKEwiFgbCmz8vkAhUIVK0KHfaGCRUQMwh7KAAwAA&iact=mrc&uact=8:"></p>
+ </div>
+</div>
+ </div>
+</body>
+</html>
