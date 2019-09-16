@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>blog</title><link href="https://teckhockng.github.io/blog/" rel="alternate"></link><link href="https://teckhockng.github.io/blog/feeds/all.atom.xml" rel="self"></link><id>https://teckhockng.github.io/blog/</id><updated>2019-09-16T00:00:00-04:00</updated><entry><title>Comparison Between Theil-Sen Regressor and Simple Linear Regression</title><link href="https://teckhockng.github.io/blog/TheilSenRegressor.html" rel="alternate"></link><published>2019-09-16T00:00:00-04:00</published><updated>2019-09-16T00:00:00-04:00</updated><author><name>Teck Hock Ng</name></author><id>tag:teckhockng.github.io,2019-09-16:/blog/TheilSenRegressor.html</id><summary type="html">&lt;p&gt;This is my second blog post&lt;/p&gt;
-&lt;h3&gt;Theil-Sen Regression&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>blog</title><link href="https://teckhockng.github.io/blog/" rel="alternate"></link><link href="https://teckhockng.github.io/blog/feeds/all.atom.xml" rel="self"></link><id>https://teckhockng.github.io/blog/</id><updated>2019-09-16T00:00:00-04:00</updated><entry><title>Comparison Between Theil-Sen Regressor and Simple Linear Regression</title><link href="https://teckhockng.github.io/blog/TheilSenRegressor.html" rel="alternate"></link><published>2019-09-16T00:00:00-04:00</published><updated>2019-09-16T00:00:00-04:00</updated><author><name>Teck Hock Ng</name></author><id>tag:teckhockng.github.io,2019-09-16:/blog/TheilSenRegressor.html</id><summary type="html">&lt;h3&gt;Theil-Sen Regression&lt;/h3&gt;
 &lt;h5&gt;Objectives: To show Theil-Sen Regression is more robust against outliers compared to Simple Linear Regression&lt;/h5&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#import models and plotting tools&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.linear_model&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;TheilSenRegressor&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;LinearRegression&lt;/span&gt;
@@ -8,8 +7,8 @@
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.metrics&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;r2_score&lt;/span&gt;
 
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
-&lt;span class="kn"&gt;import …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;This is my second blog post&lt;/p&gt;
-&lt;h3&gt;Theil-Sen Regression&lt;/h3&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;matplotlib.pyplot …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h3&gt;Theil-Sen Regression&lt;/h3&gt;
 &lt;h5&gt;Objectives: To show Theil-Sen Regression is more robust against outliers compared to Simple Linear Regression&lt;/h5&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#import models and plotting tools&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.linear_model&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;TheilSenRegressor&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;LinearRegression&lt;/span&gt;
@@ -67,7 +66,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="png" src="output_5_0.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="png" src="images/output_5_0.png"&gt;&lt;/p&gt;
 &lt;p&gt;Here, I did a train test split by splitting the data into 50/50.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Do a Train-test-split&lt;/span&gt;
 &lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;X&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
@@ -138,7 +137,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="png" src="output_13_0.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="png" src="images/output_13_0.png"&gt;&lt;/p&gt;
 &lt;p&gt;Plot the prediction from each model with &lt;strong&gt;X_test&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;yhat_test_linear&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;linear_model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;predict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X_test&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;yhat_test_theilsen&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;theilsen_model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;predict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X_test&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -153,7 +152,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="png" src="output_15_0.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="png" src="images/output_15_0.png"&gt;&lt;/p&gt;
 &lt;p&gt;We can see that even though linear regression scores well with the X_train, it doesn't do well with X_test
 and the cross validation.&lt;/p&gt;
 &lt;p&gt;From the graph, we can see that TheilSen model ignores the outliers and tends to fit the majority of the y values
