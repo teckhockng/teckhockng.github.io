@@ -7,6 +7,20 @@
  <div class="container">
   <h1><a href="https://teckhockng.github.io/blog">blog</a></h1>
  </div>
+ <style>
+   .vega-actions a {
+       margin-right: 12px;
+       color: #757575;
+       font-weight: normal;
+       font-size: 13px;
+   }
+   .error {
+       color: red;
+   }
+ </style>
+ <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+ <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@3.4.0"></script>
+ <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@4"></script>
 </head>
 <body>
  <div class="container">
@@ -181,8 +195,26 @@
 <div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">vega</span><span class="p">.</span><span class="n">vegalite</span><span class="p">.</span><span class="n">VegaLite</span> <span class="k">at</span> <span class="mi">0</span><span class="n">x7ff33fecec18</span><span class="o">&gt;</span>
 </pre></div>
 
+<div id="vis"></div>
+<script>
+  (function(vegaEmbed) {
+    var spec = {"config": {"view": {"width": 400, "height": 300}, "mark": {"tooltip": null}}, "layer": [{"mark": "bar", "encoding": {"x": {"type": "quantitative", "field": "percentile"}, "y": {"type": "quantitative", "field": "y"}}}, {"mark": "point", "encoding": {"opacity": {"value": 0}, "x": {"type": "quantitative", "field": "percentile"}}, "selection": {"selector003": {"type": "single", "nearest": true, "on": "mouseover", "fields": ["y"], "empty": "none"}}}, {"mark": "point", "encoding": {"opacity": {"condition": {"value": 1, "selection": "selector003"}, "value": 0}, "x": {"type": "quantitative", "field": "percentile"}, "y": {"type": "quantitative", "field": "y"}}}, {"mark": {"type": "rule", "color": "red"}, "encoding": {"x": {"type": "quantitative", "field": "percentile"}}, "transform": [{"filter": {"selection": "selector003"}}]}, {"mark": {"type": "text", "align": "left", "dx": 5, "dy": 0}, "encoding": {"text": {"condition": {"type": "quantitative", "field": "percentile", "selection": "selector003"}, "value": " "}, "x": {"type": "quantitative", "field": "percentile"}, "y": {"type": "quantitative", "field": "y"}}}, {"mark": {"type": "text", "align": "left", "dx": 5, "dy": -10}, "encoding": {"text": {"condition": {"type": "quantitative", "field": "y", "selection": "selector003"}, "value": " "}, "x": {"type": "quantitative", "field": "percentile"}, "y": {"type": "quantitative", "field": "y"}}}], "data": {"name": "data-589c8009bd1032acf6c3fa2e860ade11"}, "height": 600, "title": "Percentile of y_train values", "width": 600, "$schema": "https://vega.github.io/schema/vega-lite/v3.4.0.json", "datasets": {"data-589c8009bd1032acf6c3fa2e860ade11": [{"y": -835.018071493274, "percentile": 0}, {"y": -444.83823646552, "percentile": 1}, {"y": -363.3886505275625, "percentile": 2}, {"y": -340.13261772541864, "percentile": 3}, {"y": -308.54151792979076, "percentile": 4}, {"y": -282.8571006987326, "percentile": 5}, {"y": -258.2682562559114, "percentile": 6}, {"y": -252.57614139095102, "percentile": 7}, {"y": -247.6628018177709, "percentile": 8}, {"y": -241.67992060310775, "percentile": 9}, {"y": -227.7402897303325, "percentile": 10}, {"y": -216.87865611723595, "percentile": 11}, {"y": -214.36028119122957, "percentile": 12}, {"y": -204.1143076422381, "percentile": 13}, {"y": -187.18952807759686, "percentile": 14}, {"y": -170.54037671160953, "percentile": 15}, {"y": -163.05447886448047, "percentile": 16}, {"y": -155.4614553449076, "percentile": 17}, {"y": -151.55855865927654, "percentile": 18}, {"y": -144.89623543628028, "percentile": 19}, {"y": -138.75429456707442, "percentile": 20}, {"y": -134.1087335158439, "percentile": 21}, {"y": -127.43482918223924, "percentile": 22}, {"y": -120.23061569971266, "percentile": 23}, {"y": -111.79755697988983, "percentile": 24}, {"y": -101.50524308625384, "percentile": 25}, {"y": -92.70649677811616, "percentile": 26}, {"y": -88.38990107709756, "percentile": 27}, {"y": -79.03705317533408, "percentile": 28}, {"y": -74.73672458832394, "percentile": 29}, {"y": -67.99230490004527, "percentile": 30}, {"y": -63.814393030110736, "percentile": 31}, {"y": -60.740325154198885, "percentile": 32}, {"y": -56.07157187097297, "percentile": 33}, {"y": -48.53265858329275, "percentile": 34}, {"y": -45.981398293498664, "percentile": 35}, {"y": -42.39723763952238, "percentile": 36}, {"y": -36.97761712925085, "percentile": 37}, {"y": -33.26452232646075, "percentile": 38}, {"y": -31.911420870058702, "percentile": 39}, {"y": -28.20075968640002, "percentile": 40}, {"y": -21.71192215969929, "percentile": 41}, {"y": -20.613811369098432, "percentile": 42}, {"y": -15.769485333543091, "percentile": 43}, {"y": -13.435908346501137, "percentile": 44}, {"y": -7.845757682422691, "percentile": 45}, {"y": -4.274909675082899, "percentile": 46}, {"y": -0.3074004978537239, "percentile": 47}, {"y": 2.788385337913249, "percentile": 48}, {"y": 6.728667500764336, "percentile": 49}, {"y": 14.575618468552392, "percentile": 50}, {"y": 16.520205067812604, "percentile": 51}, {"y": 19.436020392895152, "percentile": 52}, {"y": 25.47180493152756, "percentile": 53}, {"y": 34.42985406425026, "percentile": 54}, {"y": 38.48102281322768, "percentile": 55}, {"y": 41.67449078991093, "percentile": 56}, {"y": 46.65879274249497, "percentile": 57}, {"y": 48.49049304230679, "percentile": 58}, {"y": 55.11450020183062, "percentile": 59}, {"y": 57.55704217447, "percentile": 60}, {"y": 61.9167307326847, "percentile": 61}, {"y": 67.7972860501853, "percentile": 62}, {"y": 74.86056713548781, "percentile": 63}, {"y": 78.28336134349712, "percentile": 64}, {"y": 90.05277287891795, "percentile": 65}, {"y": 92.65603782901759, "percentile": 66}, {"y": 99.31266688862766, "percentile": 67}, {"y": 101.10647390741705, "percentile": 68}, {"y": 102.19948053284466, "percentile": 69}, {"y": 111.85747243526058, "percentile": 70}, {"y": 120.88047946652841, "percentile": 71}, {"y": 122.42949795432479, "percentile": 72}, {"y": 127.64771726254492, "percentile": 73}, {"y": 131.74726411945286, "percentile": 74}, {"y": 135.43852133253466, "percentile": 75}, {"y": 139.15043901201068, "percentile": 76}, {"y": 140.56649199146744, "percentile": 77}, {"y": 144.97815036149007, "percentile": 78}, {"y": 156.09722114688284, "percentile": 79}, {"y": 161.9680367390797, "percentile": 80}, {"y": 168.05877291160894, "percentile": 81}, {"y": 174.0234819237287, "percentile": 82}, {"y": 176.17602735053197, "percentile": 83}, {"y": 183.60001089849922, "percentile": 84}, {"y": 189.54519567362985, "percentile": 85}, {"y": 197.1004610848934, "percentile": 86}, {"y": 209.30885091639664, "percentile": 87}, {"y": 214.57999310933724, "percentile": 88}, {"y": 219.21003558091812, "percentile": 89}, {"y": 226.4055149463644, "percentile": 90}, {"y": 251.63664457942005, "percentile": 91}, {"y": 261.79776887850085, "percentile": 92}, {"y": 292.9073422122388, "percentile": 93}, {"y": 310.27943509990195, "percentile": 94}, {"y": 342.82672465408746, "percentile": 95}, {"y": 384.57953214295935, "percentile": 96}, {"y": 398.5356115522994, "percentile": 97}, {"y": 431.1703567571817, "percentile": 98}, {"y": 459.4642261422396, "percentile": 99}, {"y": 635.4261652802663, "percentile": 100}]}};
+    var embedOpt = {"mode": "vega-lite"};
 
-<p><img alt="png" src="images/output_14_2.png"></p>
+    function showError(el, error){
+        el.innerHTML = ('<div class="error" style="color:red;">'
+                        + '<p>JavaScript Error: ' + error.message + '</p>'
+                        + "<p>This usually means there's a typo in your chart specification. "
+                        + "See the javascript console for the full traceback.</p>"
+                        + '</div>');
+        throw error;
+    }
+    const el = document.getElementById('vis');
+    vegaEmbed("#vis", spec, embedOpt)
+      .catch(error => showError(el, error));
+  })(vegaEmbed);
+
+</script>
 <h2>Dummy Classifier</h2>
 <p>There are 5 strategies we can use to as a predictor for the Dummy Regressor. <br>
 <li> Stratified(Default) - Generates predictions based on the y_train's distribution </li>
