@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>blog - Teck Hock Ng</title><link>https://teckhockng.github.io/blog/</link><description></description><lastBuildDate>Mon, 16 Sep 2019 00:00:00 -0400</lastBuildDate><item><title>Comparison Between Theil-Sen Regressor and Simple Linear Regression</title><link>https://teckhockng.github.io/blog/TheilSenRegressor.html</link><description>&lt;h3&gt;Theil-Sen Regression&lt;/h3&gt;
+<rss version="2.0"><channel><title>blog - Teck Hock Ng</title><link>https://teckhockng.github.io/blog/</link><description></description><lastBuildDate>Sun, 29 Sep 2019 00:00:00 -0400</lastBuildDate><item><title>How to use Dummy Regressor and Dummy Classifier</title><link>https://teckhockng.github.io/blog/Dummy%20Regressor,Dummy%20Classifier.html</link><description>&lt;h1&gt;How to use Dummy Regressor and Dummy Classifier&lt;/h1&gt;
+&lt;h2&gt;Dummy Regressor&lt;/h2&gt;
+&lt;p&gt;There are 4 strategies we can use to as a predictor for the Dummy Regressor.
+* Mean(default) - Always use the mean of y_train as the prediction
+* Median - Always use the median of y_train as the prediction
+* Quantile - Use the y_train …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Teck Hock Ng</dc:creator><pubDate>Sun, 29 Sep 2019 00:00:00 -0400</pubDate><guid isPermaLink="false">tag:teckhockng.github.io,2019-09-29:/blog/Dummy Regressor,Dummy Classifier.html</guid><category>python</category></item><item><title>Comparison Between Theil-Sen Regressor and Simple Linear Regression</title><link>https://teckhockng.github.io/blog/TheilSenRegressor.html</link><description>&lt;h3&gt;Theil-Sen Regression&lt;/h3&gt;
 &lt;h5&gt;Objectives: To show Theil-Sen Regression is more robust against outliers compared to Simple Linear Regression&lt;/h5&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#import models and plotting tools&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.linear_model&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;TheilSenRegressor&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;LinearRegression&lt;/span&gt;
