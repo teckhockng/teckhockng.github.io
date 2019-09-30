@@ -17,10 +17,10 @@
   <h1>How to use Dummy Regressor and Dummy Classifier</h1>
 <h2>Dummy Regressor</h2>
 <p>There are 4 strategies we can use to as a predictor for the Dummy Regressor. <br>
-- Mean(default) - Always use the mean of y_train as the prediction
-- Median - Always use the median of y_train as the prediction
-- Quantile - Use the y_train value of the percentile specified
-- Constant - Only use the constant specified as the prediction</p>
+<li> Mean(default) - Always use the mean of y_train as the prediction </li>
+<li> Median - Always use the median of y_train as the prediction </li>
+<li> Quantile - Use the y_train value of the percentile specified </li>
+<li> Constant - Only use the constant specified as the prediction </li></p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
@@ -185,11 +185,11 @@
 <p><img alt="png" src="images/output_14_2.png"></p>
 <h2>Dummy Classifier</h2>
 <p>There are 5 strategies we can use to as a predictor for the Dummy Regressor. <br>
-- Stratified(Default) - Generates predictions based on the y_train's distribution
-- Most_frequent - Always use the mode of y_train as the prediction
-- Prior - Always predict the class that maximizes the y_train (like "most_frequent")
-- Uniform - Generates predictions uniformly at random
-- Constant - Always predicts a constant label that is provided by the user. This is useful for metrics that evaluate a non-majority class</p>
+<li> Stratified(Default) - Generates predictions based on the y_train's distribution </li>
+<li> Most_frequent - Always use the mode of y_train as the prediction </li>
+<li> Prior - Always predict the class that maximizes the y_train (like "most_frequent") </li>
+<li> Uniform - Generates predictions uniformly at random </li>
+<li> Constant - Always predicts a constant label that is provided by the user. This is useful for metrics that evaluate a non-majority class </li></p>
 <p>Observe the probability of each prediction of each model. (Probability of 0.5 or above will make the prediction for the variable to be True)</p>
 <div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 

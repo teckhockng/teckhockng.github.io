@@ -2,15 +2,15 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>blog - misc</title><link href="https://teckhockng.github.io/blog/" rel="alternate"></link><link href="https://teckhockng.github.io/blog/feeds/misc.atom.xml" rel="self"></link><id>https://teckhockng.github.io/blog/</id><updated>2019-09-29T00:00:00-04:00</updated><entry><title>How to use Dummy Regressor and Dummy Classifier</title><link href="https://teckhockng.github.io/blog/Dummy%20Regressor,Dummy%20Classifier.html" rel="alternate"></link><published>2019-09-29T00:00:00-04:00</published><updated>2019-09-29T00:00:00-04:00</updated><author><name>Teck Hock Ng</name></author><id>tag:teckhockng.github.io,2019-09-29:/blog/Dummy Regressor,Dummy Classifier.html</id><summary type="html">&lt;h1&gt;How to use Dummy Regressor and Dummy Classifier&lt;/h1&gt;
 &lt;h2&gt;Dummy Regressor&lt;/h2&gt;
 &lt;p&gt;There are 4 strategies we can use to as a predictor for the Dummy Regressor. &lt;br&gt;
-- Mean(default) - Always use the mean of y_train as the prediction
-- Median - Always use the median of y_train as the prediction
-- Quantile - Use the y_train …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;How to use Dummy Regressor and Dummy Classifier&lt;/h1&gt;
+&lt;li&gt; Mean(default) - Always use the mean of y_train as the prediction &lt;/li&gt;
+&lt;li&gt; Median - Always use the median of y_train as the prediction &lt;/li&gt;
+&lt;li&gt; Quantile - Use the y_train …&lt;/li&gt;&lt;/p&gt;</summary><content type="html">&lt;h1&gt;How to use Dummy Regressor and Dummy Classifier&lt;/h1&gt;
 &lt;h2&gt;Dummy Regressor&lt;/h2&gt;
 &lt;p&gt;There are 4 strategies we can use to as a predictor for the Dummy Regressor. &lt;br&gt;
-- Mean(default) - Always use the mean of y_train as the prediction
-- Median - Always use the median of y_train as the prediction
-- Quantile - Use the y_train value of the percentile specified
-- Constant - Only use the constant specified as the prediction&lt;/p&gt;
+&lt;li&gt; Mean(default) - Always use the mean of y_train as the prediction &lt;/li&gt;
+&lt;li&gt; Median - Always use the median of y_train as the prediction &lt;/li&gt;
+&lt;li&gt; Quantile - Use the y_train value of the percentile specified &lt;/li&gt;
+&lt;li&gt; Constant - Only use the constant specified as the prediction &lt;/li&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;plt&lt;/span&gt;
@@ -175,11 +175,11 @@
 &lt;p&gt;&lt;img alt="png" src="images/output_14_2.png"&gt;&lt;/p&gt;
 &lt;h2&gt;Dummy Classifier&lt;/h2&gt;
 &lt;p&gt;There are 5 strategies we can use to as a predictor for the Dummy Regressor. &lt;br&gt;
-- Stratified(Default) - Generates predictions based on the y_train's distribution
-- Most_frequent - Always use the mode of y_train as the prediction
-- Prior - Always predict the class that maximizes the y_train (like "most_frequent")
-- Uniform - Generates predictions uniformly at random
-- Constant - Always predicts a constant label that is provided by the user. This is useful for metrics that evaluate a non-majority class&lt;/p&gt;
+&lt;li&gt; Stratified(Default) - Generates predictions based on the y_train's distribution &lt;/li&gt;
+&lt;li&gt; Most_frequent - Always use the mode of y_train as the prediction &lt;/li&gt;
+&lt;li&gt; Prior - Always predict the class that maximizes the y_train (like "most_frequent") &lt;/li&gt;
+&lt;li&gt; Uniform - Generates predictions uniformly at random &lt;/li&gt;
+&lt;li&gt; Constant - Always predicts a constant label that is provided by the user. This is useful for metrics that evaluate a non-majority class &lt;/li&gt;&lt;/p&gt;
 &lt;p&gt;Observe the probability of each prediction of each model. (Probability of 0.5 or above will make the prediction for the variable to be True)&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;seed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;42&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
