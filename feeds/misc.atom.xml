@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>blog - misc</title><link href="https://teckhockng.github.io/blog/" rel="alternate"></link><link href="https://teckhockng.github.io/blog/feeds/misc.atom.xml" rel="self"></link><id>https://teckhockng.github.io/blog/</id><updated>2019-09-30T00:00:00-04:00</updated><entry><title>How to add interactive Altair Charts to your GitHub pages</title><link href="https://teckhockng.github.io/blog/how-to-add-interactive-altair-charts-to-github-pages.html" rel="alternate"></link><published>2019-09-30T00:00:00-04:00</published><updated>2019-09-30T00:00:00-04:00</updated><author><name>Teck Hock Ng</name></author><id>tag:teckhockng.github.io,2019-09-30:/blog/how-to-add-interactive-altair-charts-to-github-pages.html</id><summary type="html">&lt;h1&gt;How to add interactive Altair Charts to your GitHub pages&lt;/h1&gt;
-&lt;p&gt;Yesterday I tried to upload an interactive Altair chart that shows tooltip on hover to my GitHub blog but when I download it from the Jupyter notebook as markdown file, there's only &lt;code&gt;.png&lt;/code&gt; version of the chart. So, I found …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;How to add interactive Altair Charts to your GitHub pages&lt;/h1&gt;
-&lt;p&gt;Yesterday I tried to upload an interactive Altair chart that shows tooltip on hover to my GitHub blog but when I download it from the Jupyter notebook as markdown file, there's only &lt;code&gt;.png&lt;/code&gt; version of the chart. So, I found a workaround to have an interactive Altair on my website.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>blog - misc</title><link href="https://teckhockng.github.io/blog/" rel="alternate"></link><link href="https://teckhockng.github.io/blog/feeds/misc.atom.xml" rel="self"></link><id>https://teckhockng.github.io/blog/</id><updated>2019-09-30T00:00:00-04:00</updated><entry><title>How to add interactive Altair charts to your GitHub pages</title><link href="https://teckhockng.github.io/blog/how-to-add-interactive-altair-charts-to-github-pages.html" rel="alternate"></link><published>2019-09-30T00:00:00-04:00</published><updated>2019-09-30T00:00:00-04:00</updated><author><name>Teck Hock Ng</name></author><id>tag:teckhockng.github.io,2019-09-30:/blog/how-to-add-interactive-altair-charts-to-github-pages.html</id><summary type="html">&lt;p&gt;Yesterday I tried to upload an interactive Altair chart that shows tooltip on hover to my GitHub blog but when I download it from the Jupyter notebook as markdown file, there's only &lt;code&gt;.png&lt;/code&gt; version of the chart. So, I found a workaround to have an interactive Altair on my website …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Yesterday I tried to upload an interactive Altair chart that shows tooltip on hover to my GitHub blog but when I download it from the Jupyter notebook as markdown file, there's only &lt;code&gt;.png&lt;/code&gt; version of the chart. So, I found a workaround to have an interactive Altair on my website.&lt;/p&gt;
 &lt;h3&gt;I'll use the chart from my &lt;a href="https://teckhockng.github.io/blog/Dummy%20Regressor&amp;Dummy%20Classifier.html"&gt; previous blog post&lt;/a&gt; as an example.&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
@@ -188,40 +186,10 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h4&gt;Normally I will include the chart/graph right below where I ran the &lt;code&gt;.save(chart.html)&lt;/code&gt; section. But you can place it anywhere you want inside the &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; tag.  If you are using Pelican Website please visit a more in depth guide &lt;a href="https://teckhockng.github.io/blog/pelican-website-interactive-altair-chart.html"&gt;here&lt;a&gt;.&lt;/h4&gt;
-&lt;h3&gt;Finally, push the &lt;code&gt;html&lt;/code&gt; file to GitHub pages and now you have an interactive Altair chart!&lt;/h3&gt;
-&lt;p&gt;&lt;img src="images/ez_clap.gif" alt="EZ Clap" height="200" width="300"&gt;&lt;/p&gt;</content><category term="python"></category></entry><entry><title>Add interactive Altair chart to Pelican Website</title><link href="https://teckhockng.github.io/blog/pelican-website-interactive-altair-chart.html" rel="alternate"></link><published>2019-09-30T00:00:00-04:00</published><updated>2019-09-30T00:00:00-04:00</updated><author><name>Teck Hock Ng</name></author><id>tag:teckhockng.github.io,2019-09-30:/blog/pelican-website-interactive-altair-chart.html</id><summary type="html">&lt;h3&gt;I'm supposed you came from my blog post about adding interactive Altair chart to your GitHub pages. To make it auto-include the following codes. There's a few simple step you can take.&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;vega-actions&lt;/span&gt; &lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="k"&gt;margin-right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mh"&gt;#757575&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="k"&gt;font-weight&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;normal&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="k"&gt;font-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;error&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;red&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h3&gt;I'm supposed you came from my blog post about adding interactive Altair chart to your GitHub pages. To make it auto-include the following codes. There's a few simple step you can take.&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;vega-actions&lt;/span&gt; &lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="k"&gt;margin-right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mh"&gt;#757575&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="k"&gt;font-weight&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;normal&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="k"&gt;font-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;error&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;red&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://cdn.jsdelivr.net/npm//vega@3.3.1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://cdn.jsdelivr.net/npm//vega-lite@2.4.3&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://cdn.jsdelivr.net/npm//vega-embed@3.11&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;h4&gt;Normally I will include the chart/graph right below where I ran the &lt;code&gt;.save(chart.html)&lt;/code&gt; section. But you can place it anywhere you want inside the &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; tag.&lt;/h4&gt;
+&lt;h2&gt;Alternative for Pelican Website users to automate things&lt;/h2&gt;
 &lt;h3&gt;1. Navigate to your &lt;code&gt;theme/templates/article.html&lt;/code&gt; and &lt;code&gt;theme/templates/base.html&lt;/code&gt;&lt;/h3&gt;
-&lt;h4&gt;Add the following code into your &lt;code&gt;article.html&lt;/code&gt; right below your &lt;code&gt;{% block title%}&lt;/code&gt; if there's one.&lt;/h4&gt;
+&lt;h4&gt;Add the following code into your &lt;code&gt;article.html&lt;/code&gt; right below your &lt;code&gt;{% block title %}&lt;/code&gt; if there's one.&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{% block scripts %}
 {% if &amp;#39;vega&amp;#39; in article.content %}
 &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
@@ -303,14 +271,14 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;Now you only have to include everything in your &lt;code&gt;&amp;lt;body&amp;gt;&amp;lt;/body&amp;gt;&lt;/code&gt; tag of &lt;code&gt;chart.html&lt;/code&gt; and run it as &lt;code&gt;markdown&lt;/code&gt; in one of your Jupyter Notebook cell. Lastly, run the codes for your pelicanconf.py to create &lt;code&gt;html&lt;/code&gt; files to your output folder and push it to your GitHub pages.&lt;/h3&gt;
-&lt;p&gt;&lt;img src="images/ez_clap.gif" alt="EZ Clap" height="200" width="300"&gt;&lt;/p&gt;</content><category term="python"></category></entry><entry><title>How to use Dummy Regressor and Dummy Classifier</title><link href="https://teckhockng.github.io/blog/Dummy%20Regressor&amp;Dummy%20Classifier.html" rel="alternate"></link><published>2019-09-29T00:00:00-04:00</published><updated>2019-09-29T00:00:00-04:00</updated><author><name>Teck Hock Ng</name></author><id>tag:teckhockng.github.io,2019-09-29:/blog/Dummy Regressor&amp;Dummy Classifier.html</id><summary type="html">&lt;h1&gt;How to use Dummy Regressor and Dummy Classifier&lt;/h1&gt;
-&lt;h2&gt;Dummy Regressor&lt;/h2&gt;
+&lt;h4&gt;Now you only have to paste everything in your &lt;code&gt;&amp;lt;body&amp;gt;&amp;lt;/body&amp;gt;&lt;/code&gt; tag of &lt;code&gt;chart.html&lt;/code&gt; and run it as &lt;code&gt;markdown&lt;/code&gt; in your Jupyter Notebook cell. Run your &lt;code&gt;pelicanconf.py&lt;/code&gt; file command from your terminal to create &lt;code&gt;html&lt;/code&gt; files to your content folder.&lt;/h4&gt;
+&lt;h3&gt;Finally, push the &lt;code&gt;html&lt;/code&gt; files to GitHub pages and now you have an interactive Altair chart!&lt;/h3&gt;
+&lt;p&gt;&lt;img src="images/ez_clap.gif" alt="EZ Clap" height="200" width="300"&gt;&lt;/p&gt;</content><category term="python"></category></entry><entry><title>How to use Dummy Regressor and Dummy Classifier</title><link href="https://teckhockng.github.io/blog/Dummy%20Regressor&amp;Dummy%20Classifier.html" rel="alternate"></link><published>2019-09-29T00:00:00-04:00</published><updated>2019-09-29T00:00:00-04:00</updated><author><name>Teck Hock Ng</name></author><id>tag:teckhockng.github.io,2019-09-29:/blog/Dummy Regressor&amp;Dummy Classifier.html</id><summary type="html">&lt;h2&gt;Dummy Regressor&lt;/h2&gt;
 &lt;p&gt;There are 4 strategies we can use to as a predictor for the Dummy Regressor. &lt;br&gt;
 &lt;li&gt; Mean(default) - Always use the mean of y_train as the prediction &lt;/li&gt;
 &lt;li&gt; Median - Always use the median of y_train as the prediction &lt;/li&gt;
-&lt;li&gt; Quantile - Use the y_train …&lt;/li&gt;&lt;/p&gt;</summary><content type="html">&lt;h1&gt;How to use Dummy Regressor and Dummy Classifier&lt;/h1&gt;
-&lt;h2&gt;Dummy Regressor&lt;/h2&gt;
+&lt;li&gt; Quantile - Use the y_train value of the percentile specified &lt;/li&gt;
+&lt;li&gt; Constant - Only use …&lt;/li&gt;&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Dummy Regressor&lt;/h2&gt;
 &lt;p&gt;There are 4 strategies we can use to as a predictor for the Dummy Regressor. &lt;br&gt;
 &lt;li&gt; Mean(default) - Always use the mean of y_train as the prediction &lt;/li&gt;
 &lt;li&gt; Median - Always use the median of y_train as the prediction &lt;/li&gt;

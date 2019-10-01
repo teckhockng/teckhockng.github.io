@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <title>How to add interactive Altair Charts to your GitHub pages
+ <title>How to add interactive Altair charts to your GitHub pages
 </title>
  <!-- Latest compiled and minified CSS -->
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -27,10 +27,9 @@
  <div class="container">
 <div class="row">
  <div class="col-md-8">
-  <h3>How to add interactive Altair Charts to your GitHub pages</h3>
+  <h3>How to add interactive Altair charts to your GitHub pages</h3>
   <label>2019-09-30</label>
-  <h1>How to add interactive Altair Charts to your GitHub pages</h1>
-<p>Yesterday I tried to upload an interactive Altair chart that shows tooltip on hover to my GitHub blog but when I download it from the Jupyter notebook as markdown file, there's only <code>.png</code> version of the chart. So, I found a workaround to have an interactive Altair on my website.</p>
+  <p>Yesterday I tried to upload an interactive Altair chart that shows tooltip on hover to my GitHub blog but when I download it from the Jupyter notebook as markdown file, there's only <code>.png</code> version of the chart. So, I found a workaround to have an interactive Altair on my website.</p>
 <h3>I'll use the chart from my <a href="https://teckhockng.github.io/blog/Dummy%20Regressor&Dummy%20Classifier.html"> previous blog post</a> as an example.</h3>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
@@ -217,8 +216,93 @@
 </pre></div>
 
 
-<h4>Normally I will include the chart/graph right below where I ran the <code>.save(chart.html)</code> section. But you can place it anywhere you want inside the <code>&lt;body&gt;</code> tag.  If you are using Pelican Website please visit a more in depth guide <a href="https://teckhockng.github.io/blog/pelican-website-interactive-altair-chart.html">here<a>.</h4>
-<h3>Finally, push the <code>html</code> file to GitHub pages and now you have an interactive Altair chart!</h3>
+<h4>Normally I will include the chart/graph right below where I ran the <code>.save(chart.html)</code> section. But you can place it anywhere you want inside the <code>&lt;body&gt;</code> tag.</h4>
+<h2>Alternative for Pelican Website users to automate things</h2>
+<h3>1. Navigate to your <code>theme/templates/article.html</code> and <code>theme/templates/base.html</code></h3>
+<h4>Add the following code into your <code>article.html</code> right below your <code>{% block title %}</code> if there's one.</h4>
+<div class="highlight"><pre><span></span>{% block scripts %}
+{% if &#39;vega&#39; in article.content %}
+<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="p">.</span><span class="nc">vega-actions</span> <span class="nt">a</span> <span class="p">{</span>
+    <span class="k">margin-right</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">color</span><span class="p">:</span> <span class="mh">#757575</span><span class="p">;</span>
+    <span class="k">font-weight</span><span class="p">:</span> <span class="kc">normal</span><span class="p">;</span>
+    <span class="k">font-size</span><span class="p">:</span> <span class="mi">13</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">error</span> <span class="p">{</span>
+    <span class="k">color</span><span class="p">:</span> <span class="kc">red</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdn.jsdelivr.net/npm//vega@3.3.1&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdn.jsdelivr.net/npm//vega-lite@2.4.3&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdn.jsdelivr.net/npm//vega-embed@3.11&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+{% endif %}
+{% endblock %}
+</pre></div>
+
+
+<h4>For example, my <code>article.html</code> looks like this</h4>
+<div class="highlight"><pre><span></span>{% extends &quot;base.html&quot; %}
+{% block title %}{{ article.title }}
+{% endblock %}
+{% block scripts %}
+{% if &#39;vega&#39; in article.content %}
+<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="p">.</span><span class="nc">vega-actions</span> <span class="nt">a</span> <span class="p">{</span>
+    <span class="k">margin-right</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">color</span><span class="p">:</span> <span class="mh">#757575</span><span class="p">;</span>
+    <span class="k">font-weight</span><span class="p">:</span> <span class="kc">normal</span><span class="p">;</span>
+    <span class="k">font-size</span><span class="p">:</span> <span class="mi">13</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">error</span> <span class="p">{</span>
+    <span class="k">color</span><span class="p">:</span> <span class="kc">red</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdn.jsdelivr.net/npm//vega@3.3.1&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdn.jsdelivr.net/npm//vega-lite@2.4.3&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdn.jsdelivr.net/npm//vega-embed@3.11&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+{% endif %}
+{% endblock %}
+{% block content %}
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+ <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-md-8&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>{{ article.title }}<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>{{ article.date.strftime(&#39;%Y-%m-%d&#39;) }}<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+  {{ article.content }}
+ <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+{% endblock %}
+</pre></div>
+
+
+<h4>2. After that, add the following code into your <code>base.html</code> right below your <code>{% block title %}</code> if there's one.</h4>
+<div class="highlight"><pre><span></span>{% block scripts %}{% endblock %}
+</pre></div>
+
+
+<h4>For example, my <code>base.html</code> looks like this</h4>
+<div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+ <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{% block title %}{% endblock %}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+ <span class="c">&lt;!-- Latest compiled and minified CSS --&gt;</span>
+ <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css&quot;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&quot;sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu&quot;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&quot;anonymous&quot;</span><span class="p">&gt;</span>
+ <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}&quot;</span><span class="p">&gt;</span>{{ SITENAME }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+ <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+ {% block scripts %}{% endblock %}
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+ <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
+  {% block content %}{% endblock %}
+ <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<h4>Now you only have to paste everything in your <code>&lt;body&gt;&lt;/body&gt;</code> tag of <code>chart.html</code> and run it as <code>markdown</code> in your Jupyter Notebook cell. Run your <code>pelicanconf.py</code> file command from your terminal to create <code>html</code> files to your content folder.</h4>
+<h3>Finally, push the <code>html</code> files to GitHub pages and now you have an interactive Altair chart!</h3>
 <p><img src="images/ez_clap.gif" alt="EZ Clap" height="200" width="300"></p>
  </div>
 </div>
