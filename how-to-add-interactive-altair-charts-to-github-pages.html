@@ -6,7 +6,7 @@
  <!-- Latest compiled and minified CSS -->
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
  <div class="container">
-  <h1><a href="https://teckhockng.github.io/blog">blog</a></h1>
+  <h1><a href="https://teckhockng.github.io/blog">Data Science Blog</a></h1>
  </div>
 <style>
 .vega-actions a {
@@ -216,10 +216,10 @@
 </pre></div>
 
 
-<h4>Normally I will include the chart/graph right below where I ran the <code>.save(chart.html)</code> section. But you can place it anywhere you want inside the <code>&lt;body&gt;</code> tag.</h4>
-<h2>Alternative for Pelican Website users to automate things</h2>
-<h3>1. Navigate to your <code>theme/templates/article.html</code> and <code>theme/templates/base.html</code></h3>
-<h4>Add the following code into your <code>article.html</code> right below your <code>{% block title %}</code> if there's one.</h4>
+<h5>Normally I will include the chart/graph right below where I ran the <code>.save(chart.html)</code> section. But you can place it anywhere you want inside the <code>&lt;body&gt;</code> tag.</h5>
+<h3>Alternative for Pelican Website users to automate things</h3>
+<h4>1. Navigate to your <code>theme/templates/article.html</code> and <code>theme/templates/base.html</code></h4>
+<h5>Add the following code into your <code>article.html</code> right below your <code>{% block title %}</code> if there's one.</h5>
 <div class="highlight"><pre><span></span>{% block scripts %}
 {% if &#39;vega&#39; in article.content %}
 <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
@@ -301,8 +301,8 @@
 </pre></div>
 
 
-<h4>Now you only have to paste everything in your <code>&lt;body&gt;&lt;/body&gt;</code> tag of <code>chart.html</code> and run it as <code>markdown</code> in your Jupyter Notebook cell. Run your <code>pelicanconf.py</code> file command from your terminal to create <code>html</code> files to your content folder.</h4>
-<h3>Finally, push the <code>html</code> files to GitHub pages and now you have an interactive Altair chart!</h3>
+<h5>Now you only have to paste everything in your <code>&lt;body&gt;&lt;/body&gt;</code> tag of <code>chart.html</code> and run it as <code>markdown</code> in your Jupyter Notebook cell. Run your <code>pelicanconf.py</code> file command from your terminal to create <code>html</code> files to your content folder.</h5>
+<h4>Finally, push the <code>html</code> files to GitHub pages and now you have an interactive Altair chart!</h4>
 <p><img src="images/ez_clap.gif" alt="EZ Clap" height="200" width="300"></p>
  </div>
 </div>
