@@ -15,8 +15,8 @@
 &lt;li&gt;generates the surrounding "context words" as the output.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;To use Emoji2Vec, here's a few step you have to do:
-* Run &lt;code&gt;!pip install gensim --upgrade&lt;/code&gt;
-* Download the pre-trained model &lt;a href="https://github.com/uclnlp/emoji2vec/tree/master/pre-trained"&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;li&gt;Run &lt;code&gt;!pip install gensim --upgrade&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Download the pre-trained model &lt;a href="https://github.com/uclnlp/emoji2vec/tree/master/pre-trained"&gt;here&lt;/a&gt;&lt;/li&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Import KeyedVectors&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;gensim.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;KeyedVectors&lt;/span&gt;
 
