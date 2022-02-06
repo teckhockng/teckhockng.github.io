@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" charset="utf-8" content="width=device-width"/>
+  <title>TED Talk Viral Predictor</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://teckhockng.github.io/theme/css/main.9f548f79.css">
+    <link rel="stylesheet" href="https://teckhockng.github.io/theme/webassets-external/010418e8be77eba9c979b3618bbf36f4_print.css" media="print">
+  <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+<meta property="og:title" content="Teck Hock NG - TED Talk Viral Predictor">
+  <meta property="og:description" content="import pandas as pd import numpy as np from sklearn_pandas import DataFrameMapper, CategoricalImputer from sklearn.model_selection import train_test_split from sklearn.preprocessing import...">
+<meta property="og:url" content="https://teckhockng.github.io/ted-talk-viral-predictor.html">
+    <meta property="og:image" content="images/days.png">
+    <meta name="twitter:image:alt" content="Teck Hock NG">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body id="index" class="home">
+<header class="hero is-primary">
+  <div class="hero-head">
+    <div class="container">
+      <nav class="nav">
+        <div class="nav-left">
+          <a class="nav-item is-brand title is-3"
+             href="https://teckhockng.github.io/">Teck Hock NG</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<nav class="nav has-shadow is-hidden-print">
+  <div class="container">
+    <div class="nav-center"></div>
+    <span id="navToggle" class="nav-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+    <div id="navMenu" class="nav-right nav-menu">
+          <a class="nav-item is-tab "
+             href="https://teckhockng.github.io/category/visualization.html">Visualization</a>
+          <a class="nav-item is-tab "
+             href="https://teckhockng.github.io/category/regressor.html">Regressor</a>
+          <a class="nav-item is-tab "
+             href="https://teckhockng.github.io/category/nlp.html">NLP</a>
+          <a class="nav-item is-tab "
+             href="https://teckhockng.github.io/category/flask.html">Flask</a>
+          <a class="nav-item is-tab is-active"
+             href="https://teckhockng.github.io/category/classifier.html">Classifier</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="section columns">
+    <div class="column is-three-quarters-desktop is-two-thirds-tablet">
+<section id="content" class="body">
+  <article>
+    <h1 class="title">
+      <a href="https://teckhockng.github.io/ted-talk-viral-predictor.html" rel="bookmark"
+         title="Permalink to TED Talk Viral Predictor">TED Talk Viral Predictor</a></h1>
+<footer class="post-info">
+  <abbr class="published" title="2019-10-20T00:00:00-04:00">
+    Published <span class="is-info">Sun 20 October 2019</span>
+    in <a href="https://teckhockng.github.io/category/classifier.html">Classifier</a>
+  </abbr>
+
+    <p class="author">
+      <em>by           <a class="url fn" href="https://teckhockng.github.io/author/teck-hock-ng.html">Teck Hock Ng</a>
+</em>
+      <span class="tag is-small"><a href="https://teckhockng.github.io/tag/python.html">python</a></span>
+    </p>
+  
+</footer>    <div class="section"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn_pandas</span> <span class="kn">import</span> <span class="n">DataFrameMapper</span><span class="p">,</span> <span class="n">CategoricalImputer</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">LabelEncoder</span><span class="p">,</span> <span class="n">LabelBinarizer</span><span class="p">,</span> <span class="n">LabelEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Lasso</span><span class="p">,</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span><span class="p">,</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/ted_main.csv&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>comments              0
+description           0
+duration              0
+event                 0
+film_date             0
+languages             0
+main_speaker          0
+name                  0
+num_speaker           0
+published_date        0
+ratings               0
+related_talks         0
+speaker_occupation    6
+tags                  0
+title                 0
+url                   0
+views                 0
+dtype: int64
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># Drop null</span>
+<span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>comments</th>
+      <th>description</th>
+      <th>duration</th>
+      <th>event</th>
+      <th>film_date</th>
+      <th>languages</th>
+      <th>main_speaker</th>
+      <th>name</th>
+      <th>num_speaker</th>
+      <th>published_date</th>
+      <th>ratings</th>
+      <th>related_talks</th>
+      <th>speaker_occupation</th>
+      <th>tags</th>
+      <th>title</th>
+      <th>url</th>
+      <th>views</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4553</td>
+      <td>Sir Ken Robinson makes an entertaining and pro...</td>
+      <td>1164</td>
+      <td>TED2006</td>
+      <td>1140825600</td>
+      <td>60</td>
+      <td>Ken Robinson</td>
+      <td>Ken Robinson: Do schools kill creativity?</td>
+      <td>1</td>
+      <td>1151367060</td>
+      <td>[{'id': 7, 'name': 'Funny', 'count': 19645}, {...</td>
+      <td>[{'id': 865, 'hero': 'https://pe.tedcdn.com/im...</td>
+      <td>Author/educator</td>
+      <td>['children', 'creativity', 'culture', 'dance',...</td>
+      <td>Do schools kill creativity?</td>
+      <td>https://www.ted.com/talks/ken_robinson_says_sc...</td>
+      <td>47227110</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>265</td>
+      <td>With the same humor and humanity he exuded in ...</td>
+      <td>977</td>
+      <td>TED2006</td>
+      <td>1140825600</td>
+      <td>43</td>
+      <td>Al Gore</td>
+      <td>Al Gore: Averting the climate crisis</td>
+      <td>1</td>
+      <td>1151367060</td>
+      <td>[{'id': 7, 'name': 'Funny', 'count': 544}, {'i...</td>
+      <td>[{'id': 243, 'hero': 'https://pe.tedcdn.com/im...</td>
+      <td>Climate advocate</td>
+      <td>['alternative energy', 'cars', 'climate change...</td>
+      <td>Averting the climate crisis</td>
+      <td>https://www.ted.com/talks/al_gore_on_averting_...</td>
+      <td>3200520</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>124</td>
+      <td>New York Times columnist David Pogue takes aim...</td>
+      <td>1286</td>
+      <td>TED2006</td>
+      <td>1140739200</td>
+      <td>26</td>
+      <td>David Pogue</td>
+      <td>David Pogue: Simplicity sells</td>
+      <td>1</td>
+      <td>1151367060</td>
+      <td>[{'id': 7, 'name': 'Funny', 'count': 964}, {'i...</td>
+      <td>[{'id': 1725, 'hero': 'https://pe.tedcdn.com/i...</td>
+      <td>Technology columnist</td>
+      <td>['computers', 'entertainment', 'interface desi...</td>
+      <td>Simplicity sells</td>
+      <td>https://www.ted.com/talks/david_pogue_says_sim...</td>
+      <td>1636292</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 2550 entries, 0 to 2549
+Data columns (total 17 columns):
+comments              2550 non-null int64
+description           2550 non-null object
+duration              2550 non-null int64
+event                 2550 non-null object
+film_date             2550 non-null int64
+languages             2550 non-null int64
+main_speaker          2550 non-null object
+name                  2550 non-null object
+num_speaker           2550 non-null int64
+published_date        2550 non-null int64
+ratings               2550 non-null object
+related_talks         2550 non-null object
+speaker_occupation    2544 non-null object
+tags                  2550 non-null object
+title                 2550 non-null object
+url                   2550 non-null object
+views                 2550 non-null int64
+dtypes: int64(7), object(10)
+memory usage: 338.8+ KB
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># Using median of views as a marker for video virality</span>
+<span class="n">median</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;views&#39;</span><span class="p">]))</span>
+<span class="n">median</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;view&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;views&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">median</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>comments</th>
+      <th>description</th>
+      <th>duration</th>
+      <th>event</th>
+      <th>film_date</th>
+      <th>languages</th>
+      <th>main_speaker</th>
+      <th>name</th>
+      <th>num_speaker</th>
+      <th>published_date</th>
+      <th>ratings</th>
+      <th>related_talks</th>
+      <th>speaker_occupation</th>
+      <th>tags</th>
+      <th>title</th>
+      <th>url</th>
+      <th>views</th>
+      <th>view</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4553</td>
+      <td>Sir Ken Robinson makes an entertaining and pro...</td>
+      <td>1164</td>
+      <td>TED2006</td>
+      <td>1140825600</td>
+      <td>60</td>
+      <td>Ken Robinson</td>
+      <td>Ken Robinson: Do schools kill creativity?</td>
+      <td>1</td>
+      <td>1151367060</td>
+      <td>[{'id': 7, 'name': 'Funny', 'count': 19645}, {...</td>
+      <td>[{'id': 865, 'hero': 'https://pe.tedcdn.com/im...</td>
+      <td>Author/educator</td>
+      <td>['children', 'creativity', 'culture', 'dance',...</td>
+      <td>Do schools kill creativity?</td>
+      <td>https://www.ted.com/talks/ken_robinson_says_sc...</td>
+      <td>47227110</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>265</td>
+      <td>With the same humor and humanity he exuded in ...</td>
+      <td>977</td>
+      <td>TED2006</td>
+      <td>1140825600</td>
+      <td>43</td>
+      <td>Al Gore</td>
+      <td>Al Gore: Averting the climate crisis</td>
+      <td>1</td>
+      <td>1151367060</td>
+      <td>[{'id': 7, 'name': 'Funny', 'count': 544}, {'i...</td>
+      <td>[{'id': 243, 'hero': 'https://pe.tedcdn.com/im...</td>
+      <td>Climate advocate</td>
+      <td>['alternative energy', 'cars', 'climate change...</td>
+      <td>Averting the climate crisis</td>
+      <td>https://www.ted.com/talks/al_gore_on_averting_...</td>
+      <td>3200520</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>124</td>
+      <td>New York Times columnist David Pogue takes aim...</td>
+      <td>1286</td>
+      <td>TED2006</td>
+      <td>1140739200</td>
+      <td>26</td>
+      <td>David Pogue</td>
+      <td>David Pogue: Simplicity sells</td>
+      <td>1</td>
+      <td>1151367060</td>
+      <td>[{'id': 7, 'name': 'Funny', 'count': 964}, {'i...</td>
+      <td>[{'id': 1725, 'hero': 'https://pe.tedcdn.com/i...</td>
+      <td>Technology columnist</td>
+      <td>['computers', 'entertainment', 'interface desi...</td>
+      <td>Simplicity sells</td>
+      <td>https://www.ted.com/talks/david_pogue_says_sim...</td>
+      <td>1636292</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>200</td>
+      <td>In an emotionally charged talk, MacArthur-winn...</td>
+      <td>1116</td>
+      <td>TED2006</td>
+      <td>1140912000</td>
+      <td>35</td>
+      <td>Majora Carter</td>
+      <td>Majora Carter: Greening the ghetto</td>
+      <td>1</td>
+      <td>1151367060</td>
+      <td>[{'id': 3, 'name': 'Courageous', 'count': 760}...</td>
+      <td>[{'id': 1041, 'hero': 'https://pe.tedcdn.com/i...</td>
+      <td>Activist for environmental justice</td>
+      <td>['MacArthur grant', 'activism', 'business', 'c...</td>
+      <td>Greening the ghetto</td>
+      <td>https://www.ted.com/talks/majora_carter_s_tale...</td>
+      <td>1697550</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>593</td>
+      <td>You've never seen data presented like this. Wi...</td>
+      <td>1190</td>
+      <td>TED2006</td>
+      <td>1140566400</td>
+      <td>48</td>
+      <td>Hans Rosling</td>
+      <td>Hans Rosling: The best stats you've ever seen</td>
+      <td>1</td>
+      <td>1151440680</td>
+      <td>[{'id': 9, 'name': 'Ingenious', 'count': 3202}...</td>
+      <td>[{'id': 2056, 'hero': 'https://pe.tedcdn.com/i...</td>
+      <td>Global health expert; data visionary</td>
+      <td>['Africa', 'Asia', 'Google', 'demo', 'economic...</td>
+      <td>The best stats you've ever seen</td>
+      <td>https://www.ted.com/talks/hans_rosling_shows_t...</td>
+      <td>12005869</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="p">[</span><span class="s1">&#39;clean_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;published_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcfromtimestamp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">())</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="p">[</span><span class="s1">&#39;clean_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;clean_date&#39;</span><span class="p">])</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="p">[</span><span class="s1">&#39;published_day&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">day_name</span><span class="p">()</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;clean_date&#39;</span><span class="p">]]</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="p">[</span><span class="s1">&#39;published_month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">month_name</span><span class="p">()</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;clean_date&#39;</span><span class="p">]]</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span> <span class="s1">&#39;published_day&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;views&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Monday&#39;</span><span class="p">,</span> <span class="s1">&#39;Tuesday&#39;</span><span class="p">,</span> <span class="s1">&#39;Wednesday&#39;</span><span class="p">,</span> <span class="s1">&#39;Thursday&#39;</span><span class="p">,</span> <span class="s1">&#39;Friday&#39;</span><span class="p">,</span> <span class="s1">&#39;Saturday&#39;</span><span class="p">,</span> <span class="s1">&#39;Sunday&#39;</span><span class="p">]);</span>
+</code></pre></div>
+
+<p><img alt="png" src="images/days.png"></p>
+<div class="highlight"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;published_month&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;views&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;January&#39;</span><span class="p">,</span> <span class="s1">&#39;February&#39;</span><span class="p">,</span> <span class="s1">&#39;March&#39;</span><span class="p">,</span> <span class="s1">&#39;April&#39;</span><span class="p">,</span> <span class="s1">&#39;May&#39;</span><span class="p">,</span> <span class="s1">&#39;June&#39;</span><span class="p">,</span> <span class="s1">&#39;July&#39;</span><span class="p">,</span> <span class="s1">&#39;August&#39;</span><span class="p">,</span> <span class="s1">&#39;September&#39;</span><span class="p">,</span> <span class="s1">&#39;October&#39;</span><span class="p">,</span> <span class="s1">&#39;November&#39;</span><span class="p">,</span> <span class="s1">&#39;December&#39;</span><span class="p">]);</span>
+</code></pre></div>
+
+<p><img alt="png" src="images/months.png"></p>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>Index([&#39;comments&#39;, &#39;description&#39;, &#39;duration&#39;, &#39;event&#39;, &#39;film_date&#39;,
+       &#39;languages&#39;, &#39;main_speaker&#39;, &#39;name&#39;, &#39;num_speaker&#39;, &#39;published_date&#39;,
+       &#39;ratings&#39;, &#39;related_talks&#39;, &#39;speaker_occupation&#39;, &#39;tags&#39;, &#39;title&#39;,
+       &#39;url&#39;, &#39;views&#39;, &#39;view&#39;, &#39;clean_date&#39;, &#39;published_day&#39;,
+       &#39;published_month&#39;],
+      dtype=&#39;object&#39;)
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;duration&#39;</span><span class="p">,</span> <span class="s1">&#39;languages&#39;</span><span class="p">,</span> <span class="s1">&#39;published_day&#39;</span><span class="p">,</span> <span class="s1">&#39;published_month&#39;</span><span class="p">,</span> <span class="s1">&#39;tags&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;view&#39;</span><span class="p">]</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="n">mapper</span> <span class="o">=</span> <span class="n">DataFrameMapper</span><span class="p">([(</span><span class="s1">&#39;description&#39;</span><span class="p">,[</span><span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)]),</span>
+                          <span class="p">([</span><span class="s1">&#39;duration&#39;</span><span class="p">],</span> <span class="n">StandardScaler</span><span class="p">()),</span>
+                          <span class="p">([</span><span class="s1">&#39;languages&#39;</span><span class="p">],</span><span class="n">StandardScaler</span><span class="p">()),</span>
+                          <span class="p">([</span><span class="s1">&#39;published_day&#39;</span><span class="p">],</span><span class="n">LabelBinarizer</span><span class="p">()),</span>
+                          <span class="p">([</span><span class="s1">&#39;published_month&#39;</span><span class="p">],</span><span class="n">LabelBinarizer</span><span class="p">()),</span>
+                          <span class="p">(</span><span class="s1">&#39;tags&#39;</span><span class="p">,[</span><span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)]),</span>
+                          <span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,[</span><span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)])],</span> <span class="n">df_out</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">mapper</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>DataFrameMapper(default=False, df_out=True,
+                features=[(&#39;description&#39;,
+                           [TfidfVectorizer(analyzer=&#39;word&#39;, binary=False,
+                                            decode_error=&#39;strict&#39;,
+                                            dtype=&lt;class &#39;numpy.float64&#39;&gt;,
+                                            encoding=&#39;utf-8&#39;, input=&#39;content&#39;,
+                                            lowercase=True, max_df=1.0,
+                                            max_features=None, min_df=1,
+                                            ngram_range=(1, 1), norm=&#39;l2&#39;,
+                                            preprocessor=None, smooth_idf=True,
+                                            stop_words=&#39;english&#39;,
+                                            strip_accents=Non...
+                                            decode_error=&#39;strict&#39;,
+                                            dtype=&lt;class &#39;numpy.float64&#39;&gt;,
+                                            encoding=&#39;utf-8&#39;, input=&#39;content&#39;,
+                                            lowercase=True, max_df=1.0,
+                                            max_features=None, min_df=1,
+                                            ngram_range=(1, 1), norm=&#39;l2&#39;,
+                                            preprocessor=None, smooth_idf=True,
+                                            stop_words=&#39;english&#39;,
+                                            strip_accents=None,
+                                            sublinear_tf=False,
+                                            token_pattern=&#39;(?u)\\b\\w\\w+\\b&#39;,
+                                            tokenizer=None, use_idf=True,
+                                            vocabulary=None)])],
+                input_df=False, sparse=False)
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">Z_train</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">Z_test</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">Z_train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>description_000</th>
+      <th>description_05049</th>
+      <th>description_08</th>
+      <th>description_10</th>
+      <th>description_100</th>
+      <th>description_1000</th>
+      <th>description_100mph</th>
+      <th>description_10x</th>
+      <th>description_11</th>
+      <th>description_110</th>
+      <th>...</th>
+      <th>title_young</th>
+      <th>title_youth</th>
+      <th>title_youtube</th>
+      <th>title_yup</th>
+      <th>title_zap</th>
+      <th>title_zero</th>
+      <th>title_zika</th>
+      <th>title_zodiac</th>
+      <th>title_zone</th>
+      <th>title_zulu</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>591</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>462</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1036</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.153945</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1268</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 15296 columns</p>
+</div>
+
+<div class="highlight"><pre><span></span><code><span class="n">log_model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s2">&quot;liblinear&quot;</span><span class="p">)</span>
+<span class="n">log_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Z_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="c1"># y_pred = model.predict(Z_test)</span>
+<span class="c1"># print(accuracy_score(y_test, y_pred))</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
+                   intercept_scaling=1, l1_ratio=None, max_iter=100,
+                   multi_class=&#39;warn&#39;, n_jobs=None, penalty=&#39;l2&#39;,
+                   random_state=None, solver=&#39;liblinear&#39;, tol=0.0001, verbose=0,
+                   warm_start=False)
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">log_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Z_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">log_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Z_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="mf">0.9549180327868853</span><span class="w"></span>
+<span class="mf">0.7292161520190024</span><span class="w"></span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">catboost</span> <span class="k">as</span> <span class="nn">cb</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">cb</span><span class="o">.</span><span class="n">CatBoostClassifier</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Catboost model</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">catboost</span> <span class="kn">import</span> <span class="n">CatBoostClassifier</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">CatBoostClassifier</span><span class="p">(</span><span class="n">early_stopping_rounds</span><span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="n">iterations</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">random_seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">custom_loss</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;AUC&#39;</span><span class="p">,</span> <span class="s1">&#39;Accuracy&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">Z_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span>
+    <span class="n">eval_set</span><span class="o">=</span><span class="p">(</span><span class="n">Z_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">),</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>&lt;catboost.core.CatBoostClassifier at 0x7feb2452dda0&gt;
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">best_score_</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>{&#39;learn&#39;: {&#39;Accuracy&#39;: 0.8905152224824356, &#39;Logloss&#39;: 0.346167848570717},
+ &#39;validation&#39;: {&#39;Accuracy&#39;: 0.6793349168646081,
+  &#39;Logloss&#39;: 0.5950624788419,
+  &#39;AUC&#39;: 0.7483211207262959}}
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+
+<span class="n">log_reg_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;penalty&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;l1&#39;</span><span class="p">,</span> <span class="s1">&#39;l2&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+    <span class="s1">&#39;random_state&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="mi">42</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">gs_log_reg</span><span class="o">=</span><span class="n">GridSearchCV</span><span class="p">(</span><span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s2">&quot;liblinear&quot;</span><span class="p">),</span><span class="n">param_grid</span> <span class="o">=</span> <span class="n">log_reg_params</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">gs_log_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Z_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>GridSearchCV(cv=5, error_score=&#39;raise-deprecating&#39;,
+             estimator=LogisticRegression(C=1.0, class_weight=None, dual=False,
+                                          fit_intercept=True,
+                                          intercept_scaling=1, l1_ratio=None,
+                                          max_iter=100, multi_class=&#39;warn&#39;,
+                                          n_jobs=None, penalty=&#39;l2&#39;,
+                                          random_state=None, solver=&#39;liblinear&#39;,
+                                          tol=0.0001, verbose=0,
+                                          warm_start=False),
+             iid=&#39;warn&#39;, n_jobs=None,
+             param_grid={&#39;C&#39;: [0.1, 0.5, 1.0, 5, 10], &#39;penalty&#39;: [&#39;l1&#39;, &#39;l2&#39;],
+                         &#39;random_state&#39;: [42]},
+             pre_dispatch=&#39;2*n_jobs&#39;, refit=True, return_train_score=False,
+             scoring=None, verbose=0)
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">best_est</span> <span class="o">=</span> <span class="n">gs_log_reg</span><span class="o">.</span><span class="n">best_estimator_</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># Save the model into a pickle file for Flask app</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">mapper</span><span class="p">,</span> <span class="n">best_est</span><span class="p">)</span>
+<span class="n">pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">pipe</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;pipe.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+</code></pre></div>
+
+<h3>You can find the TED Talk virality predictor app <a href="https://ted-talk-viral-predictor.herokuapp.com/">here</a></h3></div>
+
+  </article>
+</section>
+    </div>
+
+    <div class="column is-one-quarter-desktop is-one-third-tablet is-hidden-print">
+      <aside class="menu">
+          <p class="menu-label">Links</p>
+          <ul class="menu-list">
+              <li><a href="https://ted-talk-viral-predictor.herokuapp.com/">
+                <span class="icon is-small"><i class="fa fa-globe fa-fw"></i></span>
+                <span class="link-text">TED Talk Virality Predictor Hackathon</span>
+              </a></li>
+              <li><a href="https://world-happiness-ranking.herokuapp.com/">
+                <span class="icon is-small"><i class="fa fa-globe fa-fw"></i></span>
+                <span class="link-text">World Happiness Ranking App</span>
+              </a></li>
+          </ul>
+<p class="menu-label">Social</p>
+<ul class="menu-list">
+    <li><a href="https://www.linkedin.com/in/teckhockng/">
+      <span class="icon is-small">
+          <i class="fa fa-linkedin fa-fw"></i>
+      </span>
+      <span class="link-text">LinkedIn</span>
+    </a></li>
+    <li><a href="https://github.com/teckhockng">
+      <span class="icon is-small">
+          <i class="fa fa-github fa-fw"></i>
+      </span>
+      <span class="link-text">GitHub</span>
+    </a></li>
+</ul>      </aside>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container has-text-centered">
+<<<<<<< HEAD
+    <p><span class="icon is-small"><i class="fa fa-html5"></i></span> HTML 5
+=======
+    <p><span class="icon is-small"><i class="fa fa-html5"></i></span> HTML 5
+>>>>>>> small changes
+      | <span class="icon is-small"><i class="fa fa-css3"></i></span> CSS 3
+    </p>
+  </div>
+</footer>
+
+<script type="text/javascript">
+  document.getElementById('navToggle').addEventListener('click', function () {
+    var nav = document.getElementById('navMenu');
+    var className = nav.getAttribute('class');
+    if (className == 'nav-right nav-menu') {
+      nav.className = 'nav-right nav-menu is-active';
+    } else {
+      nav.className = 'nav-right nav-menu';
+    }
+  });
+</script>
+</body>
+</html>
